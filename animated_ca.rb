@@ -16,7 +16,9 @@ window = GraphicsWindow.new("1D Cellular Automata", win_x, win_y, 20, 20, true)
 
 cell_size = 2
 board = Board.new row: (1..(win_x/cell_size - 1)).map { |i| i == win_x/(cell_size * 2) ? 1 : 0 }
+
 time = 0
+time_per_rule = win_y/cell_size
 
 loop do
 	board.apply_rule(rule)
@@ -42,7 +44,7 @@ loop do
 	sleep 0.02
 
 	time += 1
-	if time % (win_y/cell_size) == 0
+	if time >= time_per_rule
 		time = 0
 		rule = rand(0..255)
 	end
